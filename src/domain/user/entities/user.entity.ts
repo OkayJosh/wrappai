@@ -13,6 +13,8 @@ import { Column, Entity, OneToMany, Relation } from "typeorm";
 import { BaseUUIDEntity } from "../../entities/base";
 import { Device } from "../../device/entities/device.entity";
 import { Studio } from "../../studio/entities/studio.entity";
+import { MediaInteraction } from "../../media/entities/media.interaction.entity";
+import { Notification } from "../../notification/entities/notification.entity";
 
 @Entity()
 export class User extends BaseUUIDEntity {
@@ -122,4 +124,21 @@ export class User extends BaseUUIDEntity {
    */
   @OneToMany(() => Studio, (studio) => studio.user)
   studios: Relation<Studio[]>;
+
+  /**
+   * One-to-Many relationship with MediaInteraction entity.
+   * A user can manage or own multiple mediaInteraction, thus establishing a one-to-many relationship.
+   */
+  @OneToMany(
+    () => MediaInteraction,
+    (mediaInteraction) => mediaInteraction.user,
+  )
+  mediaInteractions: Relation<MediaInteraction[]>;
+
+  /**
+   * One-to-Many relationship with Notification entity.
+   * A user can manage or own multiple notification, thus establishing a one-to-many relationship.
+   */
+  @OneToMany(() => Notification, (notification) => notification.user)
+  notifications: Relation<Notification[]>;
 }
