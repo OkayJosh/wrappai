@@ -8,7 +8,7 @@
  * @module MediaModule
  */
 import { Column, Entity, ManyToOne, Relation } from "typeorm";
-import { BaseUUIDEntity } from "../../entities/base";
+import { BaseMediaItem } from "../../entities/base";
 import { Playlist } from "./playlist.entity";
 
 /**
@@ -17,29 +17,7 @@ import { Playlist } from "./playlist.entity";
  * This entity inherits from BaseUUIDEntity, which provides a UUID primary key and timestamps for creation and updates.
  */
 @Entity()
-export class Video extends BaseUUIDEntity {
-  /**
-   * Column name: url
-   * The URL where the video is hosted or stored.
-   */
-  @Column({ type: "varchar", length: 255 })
-  url: string;
-
-  /**
-   * Column name: title
-   * The title of the video, serving as a user-friendly identifier.
-   */
-  @Column({ type: "varchar", length: 255 })
-  title: string;
-
-  /**
-   * Column name: description
-   * A brief description or additional information about the video.
-   * This field is optional and can be left empty.
-   */
-  @Column({ type: "varchar", length: 255, nullable: true })
-  description: string | null;
-
+export class Video extends BaseMediaItem {
   /**
    * Column name: duration
    * The duration of the video in seconds.
@@ -55,11 +33,18 @@ export class Video extends BaseUUIDEntity {
   resolution: string;
 
   /**
-   * Column name: format
-   * The format of the video file, e.g., MP4, AVI, or other supported formats.
+   * Column name: codec
+   * The codec used for encoding the video (e.g., H.264, VP9).
    */
   @Column({ type: "varchar", length: 50 })
-  format: string;
+  codec: string;
+
+  /**
+   * Column name: frameRate
+   * The frame rate of the video (e.g., 24, 30, 60 fps).
+   */
+  @Column({ type: "decimal", precision: 5, scale: 2 })
+  frameRate: number;
 
   /**
    * Column name: uploadedAt
