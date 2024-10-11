@@ -8,7 +8,7 @@
  * @module MediaModule
  */
 import { Column, Entity, ManyToOne, Relation } from "typeorm";
-import { BaseUUIDEntity } from "../../entities/base";
+import { BaseMediaItem } from "../../entities/base";
 import { Playlist } from "./playlist.entity";
 
 /**
@@ -17,21 +17,7 @@ import { Playlist } from "./playlist.entity";
  * This entity inherits from BaseUUIDEntity, which provides a UUID primary key and timestamps for creation and updates.
  */
 @Entity()
-export class Music extends BaseUUIDEntity {
-  /**
-   * Column name: url
-   * The URL where the music track is hosted or stored.
-   */
-  @Column({ type: "varchar", length: 255 })
-  url: string;
-
-  /**
-   * Column name: title
-   * The title of the music track, serving as a user-friendly identifier.
-   */
-  @Column({ type: "varchar", length: 255 })
-  title: string;
-
+export class Music extends BaseMediaItem {
   /**
    * Column name: artist
    * The name of the artist or band who performed the music track.
@@ -61,13 +47,6 @@ export class Music extends BaseUUIDEntity {
    */
   @Column({ type: "int" })
   duration: number;
-
-  /**
-   * Column name: format
-   * The format of the music file, e.g., MP3, WAV, or other supported formats.
-   */
-  @Column({ type: "varchar", length: 50 })
-  format: string;
 
   /**
    * Column name: releasedAt
