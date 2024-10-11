@@ -8,7 +8,7 @@
  */
 
 import { Column, Entity, ManyToOne, Relation } from "typeorm";
-import { BaseUUIDEntity } from "../../entities/base";
+import { BaseMediaItem } from "../../entities/base";
 import { Playlist } from "./playlist.entity";
 
 /**
@@ -17,29 +17,7 @@ import { Playlist } from "./playlist.entity";
  * This entity inherits from BaseUUIDEntity, which provides a UUID primary key and timestamps for creation and updates.
  */
 @Entity()
-export class Photo extends BaseUUIDEntity {
-  /**
-   * Column name: url
-   * The URL where the photo is hosted or stored.
-   */
-  @Column({ type: "varchar", length: 255 })
-  url: string;
-
-  /**
-   * Column name: title
-   * The title or name given to the photo. It serves as a user-friendly identifier.
-   */
-  @Column({ type: "varchar", length: 255 })
-  title: string;
-
-  /**
-   * Column name: description
-   * A brief description or additional information about the photo.
-   * This field is optional and can be left empty.
-   */
-  @Column({ type: "varchar", length: 255, nullable: true })
-  description: string | null;
-
+export class Photo extends BaseMediaItem {
   /**
    * Metadata fields
    */
@@ -57,13 +35,6 @@ export class Photo extends BaseUUIDEntity {
    */
   @Column({ type: "int" })
   width: number;
-
-  /**
-   * Column name: format
-   * The format of the photo, e.g., JPEG, PNG, or other supported formats.
-   */
-  @Column({ type: "varchar", length: 50 })
-  format: string;
 
   /**
    * Column name: capturedAt
