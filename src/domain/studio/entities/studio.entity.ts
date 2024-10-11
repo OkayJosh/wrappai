@@ -9,6 +9,7 @@ import { BaseUUIDEntity } from "../../entities/base";
 import { Column, Entity, ManyToOne, OneToMany, Relation } from "typeorm";
 import { User } from "../../user/entities/user.entity";
 import { Playlist } from "../../media/entities/playlist.entity";
+import { Notification } from "../../notification/entities/notification.entity";
 
 @Entity()
 export class Studio extends BaseUUIDEntity {
@@ -57,5 +58,12 @@ export class Studio extends BaseUUIDEntity {
    * A studio can manage or own multiple playlist, thus establishing a one-to-many relationship.
    */
   @OneToMany(() => Playlist, (playlist) => playlist.studio)
-  playlist: Relation<Playlist>;
+  playlist: Relation<Playlist[]>;
+
+  /**
+   * One-to-Many relationship with Notification entity.
+   * A studio can manage or own multiple notifications, thus establishing a one-to-many relationship.
+   */
+  @OneToMany(() => Notification, (notification) => notification.studio)
+  notifications: Relation<Notification[]>;
 }
